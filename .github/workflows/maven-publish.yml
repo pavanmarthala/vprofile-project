@@ -29,4 +29,5 @@ jobs:
       run: mvn package
         
     - name: Build the Docker image
-      run: docker build -t . pavanmarthala/pavan:$(date +%s)
+      run: docker build -t pavanmarthala/pavan:$(date +%s) .
+
