@@ -212,7 +212,7 @@
   <repository>
     <id>github</id>
     <name>GitHub Packages</name>
-    <url>https://maven.pkg.github.com/pavanmarthala/Train-Ticket-Reservation-System-Java</url>
+    <url>https://maven.pkg.github.com/pavanmarthala/vprofilr-project</url>
   </repository>
 </distributionManagement>
 </project>
