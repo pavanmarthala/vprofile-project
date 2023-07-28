@@ -212,7 +212,7 @@
   <repository>
     <id>github</id>
     <name>GitHub Packages</name>
-    <url>https://github.com/pavanmarthala/vprofilr-project</url>
+    <url>https://github.com/pavanmarthala/vprofile-project</url>
   </repository>
 </distributionManagement>
 </project>
