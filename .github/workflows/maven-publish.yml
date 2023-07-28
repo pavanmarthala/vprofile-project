@@ -36,7 +36,7 @@ jobs:
       run: mvn package
         
     - name: Build the Docker image
-      run: docker build -t pavanmarthala/pavan:$(date +%s) .
+      run: docker build -t pavanmarthala/pavan:${GITHUB_REF##*/}  .
     - name: run the Docker image 
-      run: docker run -d --name app$(date +%s) -p 8888:8080 pavanmarthala/pavan:$(date +%s)
+      run: docker run -d --name app${GITHUB_REF##*/}  -p 8888:8080 pavanmarthala/pavan:${GITHUB_REF##*/} 
 
