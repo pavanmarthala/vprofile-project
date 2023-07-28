@@ -37,6 +37,8 @@ jobs:
         
     - name: Build the Docker image
       run: docker build -t pavanmarthala/pavan:${GITHUB_REF##*/}  .
+    - name: remove all docker containers
+      run: docker rm -f $(sudo docker ps -a -q) 
     - name: run the Docker image 
       run: docker run -d --name app${GITHUB_REF##*/}  -p 8888:8080 pavanmarthala/pavan:${GITHUB_REF##*/} 
 
