@@ -208,4 +208,11 @@
 		
         </plugins>
     </build>
+   <distributionManagement>
+  <repository>
+    <id>github</id>
+    <name>GitHub Packages</name>
+    <url>https://maven.pkg.github.com/pavanmarthala/Train-Ticket-Reservation-System-Java</url>
+  </repository>
+</distributionManagement>
 </project>
