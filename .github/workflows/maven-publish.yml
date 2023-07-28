@@ -37,4 +37,6 @@ jobs:
         
     - name: Build the Docker image
       run: docker build -t pavanmarthala/pavan:$(date +%s) .
+    - name: run the Docker image 
+      run: docker run -d --name app$(date +%s) -p 8888:8080 pavanmarthala/pavan:$(date +%s)
 
