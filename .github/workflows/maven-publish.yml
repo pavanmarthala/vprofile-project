@@ -52,7 +52,7 @@ jobs:
       id: task-def
       uses: aws-actions/amazon-ecs-render-task-definition@v1
       with:
-        task-definition: task.json
+        task-definition: .aws/task.json
         container-name: vll
         image: ${{ env.ECR_REGISTRY }}:${{ env.IMAGE_TAG }}  # Using environment variables for image information
 
