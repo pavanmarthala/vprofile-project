@@ -5,13 +5,13 @@ name: Maven Package
 on:
   push:
     branches:
-      - vp-r
+      - vp-rem
 
 
 jobs:
   build:
 
-    runs-on: self-hosted
+    runs-on: windows
     permissions:
       contents: read
       packages: write
@@ -28,28 +28,27 @@ jobs:
 
     - name: Build with Maven
       run: mvn package
-        
-    - name: Build the Docker image
-      run: docker build -t pavanmarthala/pavan:${GITHUB_REF##*/}  .
-    - name: Deploy to AWS ECS
+
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1  # Replace with your AWS region, e.g., us-east-1
+
+    - name: Login to Amazon ECR
+      id: login-ecr
+      uses: aws-actions/amazon-ecr-login@v1
+
+    - name: Build and push Docker image
       env:
-        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        AWS_DEFAULT_REGION: 'us-east-1' # Replace with your AWS region
-        ECS_CLUSTER_NAME: 'your-ecs-cluster-name' # Replace with your ECS cluster name
-        ECS_SERVICE_NAME: 'your-ecs-service-name' # Replace with your ECS service name
-        ECS_TASK_FAMILY: 'your-task-family-name' # Replace with your ECS task family name
+          ECR_REGISTRY: 098024363174.dkr.ecr.us-east-1.amazonaws.com/app  # Replace with your ECR repository URI, e.g., <ACCOUNT_ID>.dkr.ecr.<REGION>.amazonaws.com/<REPO_NAME>
+          IMAGE_TAG: ${{ github.sha }}
       run: |
-        # Log in to Amazon ECR (Elastic Container Registry)
-        aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin your-aws-account-id.dkr.ecr.your-aws-region.amazonaws.com
-        
-        # Tag the Docker image with the ECR repository URI
-        docker tag pavanmarthala/pavan:${GITHUB_REF##*/} your-aws-account-id.dkr.ecr.your-aws-region.amazonaws.com/pavan:${GITHUB_REF##*/}
-        
-        # Push the Docker image to ECR
-        docker push your-aws-account-id.dkr.ecr.your-aws-region.amazonaws.com/pavan:${GITHUB_REF##*/}
-        
-        # Update the ECS service with the new task definition
-        aws ecs update-service --cluster $ECS_CLUSTER_NAME --service $ECS_SERVICE_NAME --force-new-deployment --task-definition $ECS_TASK_FAMILY:${GITHUB_REF##*/}
+          docker build -t $ECR_REGISTRY:$IMAGE_TAG .
+          docker push $ECR_REGISTRY:$IMAGE_TAG
+
+    - name: Show image URL
+      run: echo $ECR_REGISTRY:$IMAGE_TAG
 
 
