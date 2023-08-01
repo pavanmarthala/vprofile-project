@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - vp-rem
+  workflow_dispatch:
 
 jobs:
   build:
