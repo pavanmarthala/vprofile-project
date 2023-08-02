@@ -55,7 +55,7 @@ jobs:
       with:
         task-definition: task_definition.json
         container-name: vll
-        image: ${{ env.ECR_REGISTRY }}:${{ env.IMAGE_TAG }}  # Using environment variables for image information
+        image: 098024363174.dkr.ecr.us-east-1.amazonaws.com/app:${{ github.sha }}  # Using environment variables for image information
 
     - name: Deploy Amazon ECS task definition
       uses: aws-actions/amazon-ecs-deploy-task-definition@v1
