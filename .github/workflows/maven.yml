@@ -9,6 +9,7 @@
 name: Java CI with Maven
 
 on:
+  workflow_dispatch:
   push:
     branches: [ "vp-rem" ]
   pull_request:
@@ -28,5 +29,5 @@ jobs:
         distribution: 'temurin'
         cache: maven
     - name: Build with Maven
-      run: mvn  Deploy 
+      run: mvn  deploy 
 
