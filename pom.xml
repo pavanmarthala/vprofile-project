@@ -173,25 +173,7 @@
                 <version>2.2.1</version>
             </extension>
         </extensions>
-    </build>
-<distributionManagement>
-    <snapshotRepository>
-    <id>maven-repo-tutorial.asimio.net</id>
-    <url>s3://maven.test/snapshot/</url>
-  </snapshotRepository>
-  <repository>
-    <id>my-s3-repo</id>
-    <url>s3://maven.test/release/</url>
-  </repository>
-</distributionManagement>
-<repositories>
-  <repository>
-    <id>my-s3-repo</id>
-    <url>s3://maven.test/release/</url>
-  </repository>
-  </repositories>
-     <build>
-        <plugins>
+	        <plugins>
             <plugin>
                 <groupId>org.eclipse.jetty</groupId>
                 <artifactId>jetty-maven-plugin</artifactId>
@@ -227,10 +209,31 @@
  		                <goals>
  		                    <goal>report</goal>
  		                </goals>
- 		            </execution>
-			   
+	                       </execution>
+				    <extension>
+                                      <groupId>org.kuali.maven.wagons</groupId>
+                                      <artifactId>maven-s3-wagon</artifactId>
+                                      <version>2.2.1</version>
+                                  </extension>
+
  		        </executions>
  		</plugin>
         </plugins>
     </build>
+<distributionManagement>
+    <snapshotRepository>
+    <id>maven-repo-tutorial.asimio.net</id>
+    <url>s3://maven.test/snapshot/</url>
+  </snapshotRepository>
+  <repository>
+    <id>my-s3-repo</id>
+    <url>s3://maven.test/release/</url>
+  </repository>
+</distributionManagement>
+<repositories>
+  <repository>
+    <id>my-s3-repo</id>
+    <url>s3://maven.test/release/</url>
+  </repository>
+  </repositories>
 </project>
