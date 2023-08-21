@@ -213,10 +213,20 @@
         </plugins>
     </build>
 <distributionManagement>
+    <snapshotRepository>
+    <id>maven-repo-tutorial.asimio.net</id>
+    <url>s3://maven.test/snapshot /</url>
+  </snapshotRepository>
   <repository>
     <id>my-s3-repo</id>
-    <url>s3://maven.test/release/</url>
+    <url>s3://maven.test/release /</url>
   </repository>
 </distributionManagement>
+<repositories>
+  <repository>
+    <id>my-s3-repo</id>
+    <url>s3://maven.test/release /</url>
+  </repository>
+  </repositories>
 
 </project>
