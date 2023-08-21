@@ -210,11 +210,6 @@
     </build>
 
    <distributionManagement>
-    <repository>
-      <id>repsy</id>
-      <name>My Private Maven Repository on Repsy</name>
-      <url>https://repo.repsy.io/mvn/jireddy/pavan</url>
-    </repository>
     <snapshotRepository>
     <id>maven-repo-tutorial.asimio.net</id>
     <url>s3://maven.test/snapshot/</url>
