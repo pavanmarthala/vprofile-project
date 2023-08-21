@@ -165,6 +165,31 @@
 		    <version>2.8.2</version>
 		</dependency>
     </dependencies>
+    <build>
+        <extensions>
+            <extension>
+                <groupId>org.kuali.maven.wagons</groupId>
+                <artifactId>maven-s3-wagon</artifactId>
+                <version>2.2.1</version>
+            </extension>
+        </extensions>
+    </build>
+<distributionManagement>
+    <snapshotRepository>
+    <id>maven-repo-tutorial.asimio.net</id>
+    <url>s3://maven.test/snapshot/</url>
+  </snapshotRepository>
+  <repository>
+    <id>my-s3-repo</id>
+    <url>s3://maven.test/release/</url>
+  </repository>
+</distributionManagement>
+<repositories>
+  <repository>
+    <id>my-s3-repo</id>
+    <url>s3://maven.test/release/</url>
+  </repository>
+  </repositories>
      <build>
         <plugins>
             <plugin>
@@ -207,30 +232,5 @@
  		        </executions>
  		</plugin>
         </plugins>
-    </build>
-<distributionManagement>
-    <snapshotRepository>
-    <id>maven-repo-tutorial.asimio.net</id>
-    <url>s3://maven.test/snapshot/</url>
-  </snapshotRepository>
-  <repository>
-    <id>my-s3-repo</id>
-    <url>s3://maven.test/release/</url>
-  </repository>
-</distributionManagement>
-<repositories>
-  <repository>
-    <id>my-s3-repo</id>
-    <url>s3://maven.test/release/</url>
-  </repository>
-  </repositories>
-    <build>
-        <extensions>
-            <extension>
-                <groupId>org.kuali.maven.wagons</groupId>
-                <artifactId>maven-s3-wagon</artifactId>
-                <version>2.2.1</version>
-            </extension>
-        </extensions>
     </build>
 </project>
