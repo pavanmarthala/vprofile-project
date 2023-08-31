@@ -4,7 +4,7 @@ pipeline {
 
     environment {
         registry = "pavanmarthala/app"
-        registryCredential = 'dockerhub'
+        registryCredential = 'docker'
     }
 
     stages{
